@@ -6,6 +6,9 @@
 # technique used when filling the hashtable with kmers. The space complexity is
 # determined by how large the hashtable is; thus, it is in O(n).
 #
+# input:	a string and an integer k
+# output:	all most frequent kmers in the given string
+#
 # CISC471
 # Sean Nesdoly
 # 2017-09-14
@@ -35,5 +38,5 @@ def parse_kmers(text, k):
 
 	return kmers
 
-# sample input
+# sample run
 get_most_frequent_kmers("ACGTTGCATGTCGCATGATGCATGAGAGCT", 4)
