@@ -9,7 +9,8 @@
 
 import itertools
 
-def gen_dna_string(k):
+def generate(k):
 	alphabet = ['A','C','G','T']
 	allKmers = [i for i in itertools.product(alphabet, repeat=k)]
+
 	return allKmers
