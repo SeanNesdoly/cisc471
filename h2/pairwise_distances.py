@@ -6,6 +6,9 @@
 # input:	a set X of integers
 # output:	the multiset of pairwise distances from X
 # 
+# sample run:
+#	pairwise_distances([1,2,6]) -->  [1, 5, 4]
+#
 # CISC471
 # Sean Nesdoly
 # 2017-09-25
@@ -20,6 +23,3 @@ def pairwise_distances(X):
 		distances.append(abs(t[0] - t[1]))
 
 	return distances
-
-# sample run output: [1, 5, 4]
-print(pairwise_distances([1,2,6])) 
