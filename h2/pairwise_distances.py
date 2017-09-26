@@ -15,11 +15,20 @@
 
 import itertools
 
+# my implementation
 def pairwise_distances(X): 
 	subsets = [i for i in itertools.combinations(X, 2)]
 
-	distances = []
+	distances = list()
 	for t in subsets:
 		distances.append(abs(t[0] - t[1]))
+
+	return distances
+
+# Prof. Rappaport's implementation 
+def delta(X):
+	distances = list()
+	for pair in list(itertools.combinations(X, 2)):
+		distances.append(abs(pair[1] - pair[0]))
 
 	return distances
