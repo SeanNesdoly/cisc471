@@ -13,8 +13,8 @@
 import numpy as np
 
 # input strings
-v = "tacgggtat"
-w = "ggacgtacg"
+v = "cactg"
+w = "gatc"
 
 # scoring parameters "from" delta matrix
 # TODO: implement a real delta matrix (acgt rows, acgt columns)
@@ -66,12 +66,11 @@ while i > 0 or j > 0:
 
         # termination case 2: exhaust all remaining characters of v
         while i != 0:
-            print i,j
             v_soln.insert(0, v[i-1])
             w_soln.insert(0, "-")
             i -= 1
 
-    elif S[i,j] == d+1 and v[i-1]==w[j-1]:
+    elif S[i,j] == (d + match) and v[i-1]==w[j-1]:
         
         # match
         v_soln.insert(0, v[i-1])
@@ -79,22 +78,22 @@ while i > 0 or j > 0:
         i -= 1
         j -= 1
     
-    elif S[i,j] == d-1 and v[i-1]!=w[j-1]:
-        
+    elif S[i,j] == (d + mismatch) and v[i-1]!=w[j-1]:
+
         # mismatch
         v_soln.insert(0, v[i-1])
         w_soln.insert(0, w[j-1])
         i -= 1
         j -= 1
 
-    elif S[i,j] == l-1:
+    elif S[i,j] == l + indel:
         
         # indel for v, use character from w
         v_soln.insert(0, "-")
         w_soln.insert(0, w[j-1])
         j -= 1
 
-    elif S[i,j] == u-1:
+    elif S[i,j] == u + indel:
 
         # use character from v, indel for w
         v_soln.insert(0, v[i-1])
