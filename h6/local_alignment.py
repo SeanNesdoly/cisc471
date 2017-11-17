@@ -45,8 +45,8 @@ for i in range(1, len(v)+1):
 v_soln = [ ] 
 w_soln = [ ] 
 
-# grab index of largest value in S
-# if there is more than 1 occurrence, take the first
+# begin traceback at index of largest value in S;
+# if there is more than 1 occurrence, use the first
 i,j = np.unravel_index(np.argmax(S), S.shape)
 score = S[i,j]
 
@@ -109,7 +109,7 @@ while i > 0 or j > 0:
 
 
 # print a solution to the local sequence alignment of strings v and w
-print 'v: ', ''.join(str(i) for i in v_soln)
-print 'w: ', ''.join(str(j) for j in w_soln)
+print 'v alignment: ', ''.join(str(i) for i in v_soln)
+print 'w alignment: ', ''.join(str(j) for j in w_soln)
 print 'local alignment score: ', score
 print '\nscoring matrix S:\n', S

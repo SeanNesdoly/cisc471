@@ -1,9 +1,8 @@
 # Global Sequence Alignment Problem
 #
-# input:  string v of length n and string w of length m, and a scoring matrix
-#         delta
+# input:  strings v and w and a scoring matrix delta
 #
-# output: an alignment of v and w whose score (as defined by the delta matrix)
+# output: an alignment of v and w whose score, as defined by the delta matrix,
 #         is maximal among all possible alignments of v and w
 #
 # CISC471
@@ -15,9 +14,9 @@ import numpy as np
 # input strings
 v = "tacgggtat"
 w = "ggacgtacg"
-# another test case: v="cactg", w="gatc"
+# global alignment: v_soln=-tacgggta-t, w_soln=ggac--gtacg; score=-1
 
-# scoring parameters "from" delta matrix
+# scoring parameters as defined by the "delta" matrix
 # TODO: implement a real delta matrix (acgt rows, acgt columns)
 indel     = -1
 mismatch  = -1
@@ -28,7 +27,7 @@ S = np.zeros( (len(v)+1, len(w)+1) )
 S[:,0] = range(0, -1*len(v)-1, indel)
 S[0,:] = range(0, -1*len(w)-1, indel)
 
-# fill the scoring matrix S 
+# fill scoring matrix S 
 for i in range(1, len(v)+1):
     for j in range(1, len(w)+1):
 
@@ -38,14 +37,16 @@ for i in range(1, len(v)+1):
                 S[i,j-1] + indel,
                 S[i-1,j] + indel)
 
-print S # scoring matrix S
 
-# ================================================== 
+# ==============================================================================
 
-# backtrack to find the solution
+
+# backtrack through S matrix to find solution
 v_soln = [ ] 
-w_soln = [ ] 
+w_soln = [ ]
+score = S[i,j]
 
+# begin traceback at bottom right corner of S matrix
 i = len(v)
 j = len(w)
 
@@ -102,7 +103,8 @@ while i > 0 or j > 0:
         w_soln.insert(0, "-")
         i -= 1 
 
-
 # print a solution to the global sequence alignment of strings v and w
-print ''.join(str(i) for i in v_soln)
-print ''.join(str(j) for j in w_soln)
+print 'v alignment: ', ''.join(str(i) for i in v_soln)
+print 'w alignment: ', ''.join(str(j) for j in w_soln)
+print 'global alignment score: ', score
+print '\nscoring matrix S:\n', S
