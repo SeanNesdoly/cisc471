@@ -13,8 +13,9 @@
 import numpy as np
 
 # input strings
-v = "cactg"
-w = "gatc"
+v = "tacgggtat"
+w = "ggacgtacg"
+# another test case: v="cactg", w="gatc"
 
 # scoring parameters "from" delta matrix
 # TODO: implement a real delta matrix (acgt rows, acgt columns)
@@ -36,11 +37,12 @@ for i in range(1, len(v)+1):
                 S[i-1,j-1] + match if v[i-1]==w[j-1] else S[i-1,j-1] + mismatch,
                 S[i,j-1] + indel,
                 S[i-1,j] + indel)
-print S
 
+print S # scoring matrix S
 
+# ================================================== 
 
-# backtrack to find solution
+# backtrack to find the solution
 v_soln = [ ] 
 w_soln = [ ] 
 
@@ -100,6 +102,7 @@ while i > 0 or j > 0:
         w_soln.insert(0, "-")
         i -= 1 
 
-# print one solution to the global sequence alignment of strings v and w
+
+# print a solution to the global sequence alignment of strings v and w
 print ''.join(str(i) for i in v_soln)
 print ''.join(str(j) for j in w_soln)
